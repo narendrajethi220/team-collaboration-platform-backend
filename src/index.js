@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes'
 
 import connectDB from './config/dbConfig.js'
 import { serverConfig } from './config/serverConfig.js'
+import indexRouter from './routes/index.router.js'
 
 
 const app = express()
@@ -15,6 +16,9 @@ app.get('/ping', (req, res) => {
     message: 'PONG'
   })
 })
+
+app.use("/api",indexRouter);
+
 
 app.listen(serverConfig.PORT, () => {
   console.log(`Server is listening on PORT ${serverConfig.PORT}`)
