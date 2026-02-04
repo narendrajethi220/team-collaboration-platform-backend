@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type:String,
         required:true,
-        unique:true,
+        unique:[true,'Username must be unique'],
         trim:true,
         match:[/^[a-zA-Z0-9]+$/],
         minLength:[3,'Username must be at least 3 characters']
