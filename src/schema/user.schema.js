@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
         required:true,
         unique:true,
         trim:true,
+        match:[/^[a-zA-Z0-9]+$/],
         minLength:[3,'Username must be at least 3 characters']
     },
     avatar: {
@@ -27,13 +28,13 @@ const userSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
-userSchema.pre('save',function(next){
+userSchema.pre('save',async function (){
     const user = this;
-    const SALT = bcrypt.genSaltSync(9);
-    const hashedPassword = bcrypt.hashSync(user.password,SALT);
+    const SALT = await bcrypt.genSaltSync(9);
+    const hashedPassword = await bcrypt.hashSync(user.password,SALT);
     user.password = hashedPassword;
     user.avatar = `https://robohash.org/${user.username}`;
-    next();
+    // next();
 })
 
 const User = mongoose.model('User', userSchema);

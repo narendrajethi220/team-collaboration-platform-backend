@@ -7,6 +7,7 @@ export const signUpService = async (data) => {
        return newUser;
     }
     catch(error){
+         console.log("User service error",error);
          if(error.name === 'ValidationError'){
            throw new ValidationError(
             {

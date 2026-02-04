@@ -1,13 +1,9 @@
 import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
+
+import userRouter from "./user.router.js";
 
 const v1Router = Router();
 
-v1Router.get("/users",(req,res)=>{
-    return res.status(StatusCodes.OK).json({
-        success:true,
-        message:"Users"
-    })
-})
+v1Router.use('/user',userRouter);
 
 export default v1Router;
