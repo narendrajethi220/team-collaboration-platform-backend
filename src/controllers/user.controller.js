@@ -16,3 +16,4 @@ export const signUpController = async(req,res) => {
        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(internalErrorResponse(error));
   }    
 }
+
