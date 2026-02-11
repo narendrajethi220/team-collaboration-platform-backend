@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 
-class clientError extends Error {
+class ClientError extends Error {
 
     constructor(error){
       super();
@@ -11,4 +11,4 @@ class clientError extends Error {
     }
 }
 
-export default clientError;
+export default ClientError;
