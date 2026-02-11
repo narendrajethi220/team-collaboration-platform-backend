@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
 
 import userRepository from "../repositories/user.repository.js";
-import User from "../schema/user.schema.js";
 import { createJwt } from "../utils/auth.util.js";
 import clientError from "../utils/errors/client.error.js";
 import ValidationError from "../utils/errors/validation.error.js";
@@ -35,7 +34,7 @@ export const signUpService = async (data) => {
 };
 
 export const signInService = async (input) => {
-
+    
      const user = await userRepository.getByEmail(input.email);
      if(!user){
        throw new clientError({
@@ -44,15 +43,18 @@ export const signInService = async (input) => {
         statusCode: 404
        })
      }
-   
-   const isPasswordMatch = bcrypt.compareSync(input.password, User.password);
+ 
+   const isPasswordMatch = bcrypt.compareSync(input.password, user.password);
+  
    if(!isPasswordMatch){
+       
      throw new clientError({
       message: "Incorrect credentials",
       explanation: "Incorrect credentials",
       statusCode: 401
      })
    }
+
    return {
     id: user._id,
     username: user.username,
